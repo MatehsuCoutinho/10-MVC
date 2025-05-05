@@ -7,6 +7,8 @@ const conn = require('./db/conn')
 
 const Task = require('./models/task.model')
 
+const taskRoutes = require('./routes/taskRoutes')
+
 app.engine('handlebars', exphbs.engine())
 app.set('view engine', 'handlebars')
 
@@ -19,6 +21,8 @@ app.use(
 app.use(express.json())
 
 app.use(express.static('public'))
+
+app.use('/tasks', taskRoutes)
 
 conn.sync().then(() => {
     app.listen(3000)
